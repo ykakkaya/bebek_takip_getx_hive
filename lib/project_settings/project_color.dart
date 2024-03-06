@@ -9,6 +9,6 @@ class ProjectColors {
   static Color appbarColor = Colors.teal;
   static Color appBarTextColor = Colors.white;
   static Color listTileDelete = Colors.red;
-  static Color listTileUpdate = Colors.teal;
+  static Color listTileUpdate = Colors.orange;
   static Color iconColor = Colors.teal;
 }

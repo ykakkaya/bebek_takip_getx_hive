@@ -23,3 +23,5 @@ class ProjectText {
   static String emptyWelcome = "HOŞGELDİN AİLEMİZE";
   static String emptyPageString = "Lütfen Bilgi Giriniz";
 }
+
+

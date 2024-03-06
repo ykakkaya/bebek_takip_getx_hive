@@ -47,6 +47,29 @@ class _AddBabyState extends State<AddBaby> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Image.asset("assets/images/add_page.png"),
+              SizedBox(
+                height: Get.height * 0.05,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red.shade100),
+                  onPressed: () {
+                    DatePicker.showDatePicker(
+                      context,
+                      minTime: DateTime(2021, 01, 01, 01, 01),
+                      locale: LocaleType.tr,
+                      onConfirm: (time) {
+                        _time = time;
+                        setState(() {});
+                      },
+                    );
+                  },
+                  child: Text(
+                      "${ProjectText.addDateButtonText} : ${_time.day}/${_time.month}/${_time.year}"),
+                ),
+              ),
+              SizedBox(
+                height: Get.size.height * 0.02,
+              ),
               inputTextField(ProjectText.addHeight, heightController),
               SizedBox(
                 height: Get.size.height * 0.02,
@@ -65,21 +88,6 @@ class _AddBabyState extends State<AddBaby> {
               ),
               SizedBox(
                 height: Get.size.height * 0.02,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  DatePicker.showDatePicker(
-                    context,
-                    minTime: DateTime(2021, 01, 01, 01, 01),
-                    locale: LocaleType.tr,
-                    onConfirm: (time) {
-                      _time = time;
-                      setState(() {});
-                    },
-                  );
-                },
-                child: Text(
-                    "${ProjectText.addDateButtonText} : ${_time.day}/${_time.month}/${_time.year}"),
               ),
               ElevatedButton(
                 onPressed: () {

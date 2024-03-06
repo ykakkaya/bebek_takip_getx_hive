@@ -9,6 +9,12 @@ class BabyController extends GetxController {
 
   var babyList = <Baby>[].obs;
 
+  @override
+  Future<void> onInit() async {
+    await getAllList();
+    super.onInit();
+  }
+
   getAllList() async {
     babyList.assignAll(await hiveController.getAllBaby());
   }

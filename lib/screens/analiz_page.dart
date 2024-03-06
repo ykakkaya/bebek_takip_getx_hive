@@ -13,11 +13,11 @@ class AnalizPage extends StatefulWidget {
 }
 
 class _AnalizPageState extends State<AnalizPage> {
-  @override
-  void initState() {
-    controller.getAllList();
-    super.initState();
-  }
+  //@override
+  // void initState() {
+  //   controller.getAllList();
+  //   super.initState();
+  // }
 
   BabyController controller = Get.put(BabyController());
   @override

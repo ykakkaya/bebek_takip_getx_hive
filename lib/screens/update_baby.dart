@@ -63,6 +63,32 @@ class _UpdateBabyState extends State<UpdateBaby> {
               SizedBox(
                   height: Get.size.height * 0.30,
                   child: Image.asset("assets/images/updatePage.png")),
+              SizedBox(
+                height: Get.size.height * 0.02,
+              ),
+              SizedBox(
+                height: Get.height * 0.05,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red.shade100),
+                  onPressed: () {
+                    DatePicker.showDatePicker(
+                      context,
+                      minTime: DateTime(2021, 01, 01, 01, 01),
+                      locale: LocaleType.tr,
+                      onConfirm: (time) {
+                        widget.baby.time = time;
+                        setState(() {});
+                      },
+                    );
+                  },
+                  child: Text(
+                      "${ProjectText.addDateButtonText} : ${widget.baby.time.day}/${widget.baby.time.month}/${widget.baby.time.year}"),
+                ),
+              ),
+              SizedBox(
+                height: Get.size.height * 0.02,
+              ),
               inputTextField(ProjectText.addHeight, heightController),
               SizedBox(
                 height: Get.size.height * 0.02,
@@ -81,21 +107,6 @@ class _UpdateBabyState extends State<UpdateBaby> {
               ),
               SizedBox(
                 height: Get.size.height * 0.02,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  DatePicker.showDatePicker(
-                    context,
-                    minTime: DateTime(2021, 01, 01, 01, 01),
-                    locale: LocaleType.tr,
-                    onConfirm: (time) {
-                      widget.baby.time = time;
-                      setState(() {});
-                    },
-                  );
-                },
-                child: Text(
-                    "${ProjectText.addDateButtonText} : ${widget.baby.time.day}/${widget.baby.time.month}/${widget.baby.time.year}"),
               ),
               ElevatedButton(
                 onPressed: () {
