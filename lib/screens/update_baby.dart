@@ -30,7 +30,7 @@ class _UpdateBabyState extends State<UpdateBaby> {
   void initState() {
     heightController.text = widget.baby.height.toString() ?? '0';
     weightController.text = widget.baby.weight.toString() ?? '0';
-    noteController.text = widget.baby.note.toString() ?? 'aaa';
+    noteController.text = widget.baby.note.toString() ?? '';
 
     super.initState();
   }
