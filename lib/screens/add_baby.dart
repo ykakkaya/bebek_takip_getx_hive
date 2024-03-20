@@ -81,6 +81,7 @@ class _AddBabyState extends State<AddBaby> {
               TextField(
                 maxLines: 3,
                 controller: noteController,
+                textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                     label: Text(ProjectText.addNote),
                     border: OutlineInputBorder(
@@ -115,6 +116,7 @@ class _AddBabyState extends State<AddBaby> {
     return TextField(
       controller: controller,
       keyboardType: TextInputType.number,
+      textInputAction: TextInputAction.next,
       decoration: InputDecoration(
           label: Text(text),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
