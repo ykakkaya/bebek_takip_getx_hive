@@ -1,4 +1,4 @@
-package com.example.bebek_takip
+package com.ykakkaya.bebek_takip
 
 import io.flutter.embedding.android.FlutterActivity
 
