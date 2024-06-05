@@ -105,8 +105,20 @@ class _AnalizPageState extends State<AnalizPage> {
                             title: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Text("${ProjectText.height}: ${item.height}"),
-                                Text("${ProjectText.weight}: ${item.weight}")
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                            "${ProjectText.height}: ${item.height}"),
+                                        Text(
+                                            " ${ProjectText.weight}: ${item.weight}"),
+                                      ],
+                                    ),
+                                    Text("${ProjectText.head}: ${item.head}")
+                                  ],
+                                ),
                               ],
                             ),
                             trailing: Row(
@@ -129,6 +141,7 @@ class _AnalizPageState extends State<AnalizPage> {
                                           dismissDirection:
                                               DismissDirection.startToEnd,
                                           duration: const Duration(seconds: 2),
+                                          backgroundColor: Colors.red[200],
                                           mainButton: TextButton(
                                               onPressed: () {
                                                 controller.removeBabyList(item);

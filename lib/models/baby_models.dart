@@ -9,14 +9,17 @@ class Baby extends HiveObject {
   @HiveField(1)
   String? note;
   @HiveField(2)
-  int weight;
+  double weight;
   @HiveField(3)
-  int height;
+  double height;
+  @HiveField(4)
+  double head;
 
   Baby({
     required this.time,
     this.note,
     required this.weight,
     required this.height,
+    required this.head,
   });
 }

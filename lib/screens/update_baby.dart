@@ -1,11 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bebek_takip/controllers/baby_controller.dart';
+import 'package:bebek_takip/main.dart';
 import 'package:bebek_takip/screens/analiz_page.dart';
-import 'package:bebek_takip/screens/index_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:get/get.dart';
-
 import 'package:bebek_takip/models/baby_models.dart';
 import 'package:bebek_takip/project_settings/project_color.dart';
 import 'package:bebek_takip/project_settings/project_text.dart';
@@ -24,12 +23,14 @@ class UpdateBaby extends StatefulWidget {
 class _UpdateBabyState extends State<UpdateBaby> {
   TextEditingController heightController = TextEditingController();
   TextEditingController weightController = TextEditingController();
+  TextEditingController headController = TextEditingController();
   TextEditingController noteController = TextEditingController();
   BabyController controller = Get.find();
   @override
   void initState() {
     heightController.text = widget.baby.height.toString() ?? '0';
     weightController.text = widget.baby.weight.toString() ?? '0';
+    headController.text = widget.baby.head.toString() ?? '0';
     noteController.text = widget.baby.note.toString() ?? '';
 
     super.initState();
@@ -82,8 +83,14 @@ class _UpdateBabyState extends State<UpdateBaby> {
                       },
                     );
                   },
-                  child: Text(
-                      "${ProjectText.addDateButtonText} : ${widget.baby.time.day}/${widget.baby.time.month}/${widget.baby.time.year}"),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.date_range_outlined),
+                      Text(
+                          "${ProjectText.addDateButtonText} : ${widget.baby.time.day}/${widget.baby.time.month}/${widget.baby.time.year}"),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
@@ -94,6 +101,10 @@ class _UpdateBabyState extends State<UpdateBaby> {
                 height: Get.size.height * 0.02,
               ),
               inputTextField(ProjectText.addWeight, weightController),
+              SizedBox(
+                height: Get.size.height * 0.02,
+              ),
+              inputTextField(ProjectText.addHead, headController),
               SizedBox(
                 height: Get.size.height * 0.02,
               ),
@@ -112,12 +123,13 @@ class _UpdateBabyState extends State<UpdateBaby> {
               ElevatedButton(
                 onPressed: () {
                   controller.updateBaby(
-                    widget.baby,
-                    weightController.text,
-                    heightController.text,
-                    noteController.text,
-                    widget.baby.time,
-                  );
+                      widget.baby,
+                      weightController.text,
+                      heightController.text,
+                      headController.text,
+                      noteController.text,
+                      widget.baby.time);
+
                   Get.back();
                 },
                 child: Text(

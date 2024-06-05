@@ -1,9 +1,9 @@
 import 'package:bebek_takip/controllers/baby_controller.dart';
+import 'package:bebek_takip/main.dart';
 import 'package:bebek_takip/models/baby_models.dart';
 import 'package:bebek_takip/project_settings/project_color.dart';
 import 'package:bebek_takip/project_settings/project_text.dart';
 import 'package:bebek_takip/screens/analiz_page.dart';
-import 'package:bebek_takip/screens/index_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:get/get.dart';
@@ -19,6 +19,7 @@ class _AddBabyState extends State<AddBaby> {
   BabyController controller = Get.find();
   TextEditingController heightController = TextEditingController();
   TextEditingController weightController = TextEditingController();
+  TextEditingController headController = TextEditingController();
   TextEditingController noteController = TextEditingController();
   var _time = DateTime.now();
   @override
@@ -63,8 +64,14 @@ class _AddBabyState extends State<AddBaby> {
                       },
                     );
                   },
-                  child: Text(
-                      "${ProjectText.addDateButtonText} : ${_time.day}/${_time.month}/${_time.year}"),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.date_range_outlined),
+                      Text(
+                          "${ProjectText.addDateButtonText} : ${_time.day}/${_time.month}/${_time.year}"),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
@@ -75,6 +82,10 @@ class _AddBabyState extends State<AddBaby> {
                 height: Get.size.height * 0.02,
               ),
               inputTextField(ProjectText.addWeight, weightController),
+              SizedBox(
+                height: Get.size.height * 0.02,
+              ),
+              inputTextField(ProjectText.addHead, headController),
               SizedBox(
                 height: Get.size.height * 0.02,
               ),
@@ -92,11 +103,16 @@ class _AddBabyState extends State<AddBaby> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  int weight = int.tryParse(weightController.text) ?? 0;
-                  int height = int.tryParse(heightController.text) ?? 0;
+                  double weight = double.tryParse(weightController.text) ?? 0;
+                  double height = double.tryParse(heightController.text) ?? 0;
+                  double head = double.tryParse(headController.text) ?? 0;
                   String note = noteController.text ?? '';
                   Baby baby = Baby(
-                      time: _time, weight: weight, height: height, note: note);
+                      time: _time,
+                      weight: weight,
+                      height: height,
+                      note: note,
+                      head: head);
                   controller.addBabyList(baby);
                   Get.off(() => const IndexPage());
                 },

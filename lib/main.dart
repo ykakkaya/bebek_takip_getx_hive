@@ -1,6 +1,12 @@
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:bebek_takip/controllers/home_controller.dart';
 import 'package:bebek_takip/models/baby_models.dart';
-import 'package:bebek_takip/screens/index_page.dart';
+import 'package:bebek_takip/project_settings/project_color.dart';
+import 'package:bebek_takip/screens/add_baby.dart';
+import 'package:bebek_takip/screens/analiz_page.dart';
+import 'package:bebek_takip/screens/grafik_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -14,7 +20,6 @@ Future<void> setupHive() async {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupHive();
-
   runApp(const MyApp());
 }
 
@@ -33,5 +38,58 @@ class MyApp extends StatelessWidget {
       ),
       home: const IndexPage(),
     );
+  }
+}
+
+class IndexPage extends StatefulWidget {
+  const IndexPage({super.key});
+
+  @override
+  State<IndexPage> createState() => _IndexPageState();
+}
+
+class _IndexPageState extends State<IndexPage> {
+  final HomeController controller = Get.put(HomeController());
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(child: Obx(() => _getPage(controller.currentIndex.value))),
+      bottomNavigationBar: Obx(
+        () => AnimatedBottomNavigationBar(
+          backgroundColor: ProjectColors.bottomNavigatorColor,
+          icons: const [Icons.auto_graph_outlined, Icons.file_present_outlined],
+          activeIndex: controller.currentIndex.value,
+          activeColor: ProjectColors.bottomActiveColor,
+          inactiveColor: ProjectColors.bottomInactiveColor,
+          gapLocation: GapLocation.none,
+          notchSmoothness: NotchSmoothness.softEdge,
+          onTap: (index) => controller.changePage(index),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.off(() => const AddBaby());
+        },
+        shape: const CircleBorder(),
+        backgroundColor: ProjectColors.fabButtonColor,
+        child: Icon(
+          Icons.add,
+          color: ProjectColors.fabIconColor,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    );
+  }
+
+  Widget _getPage(int index) {
+    switch (index) {
+      case 0:
+        return const GrafikPage();
+
+      case 1:
+        return const AnalizPage();
+      default:
+        return const GrafikPage();
+    }
   }
 }

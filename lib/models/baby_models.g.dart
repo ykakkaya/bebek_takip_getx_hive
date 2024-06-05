@@ -19,15 +19,16 @@ class BabyAdapter extends TypeAdapter<Baby> {
     return Baby(
       time: fields[0] as DateTime,
       note: fields[1] as String?,
-      weight: fields[2] as int,
-      height: fields[3] as int,
+      weight: fields[2] as double,
+      height: fields[3] as double,
+      head: fields[4] as double,
     );
   }
 
   @override
   void write(BinaryWriter writer, Baby obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.time)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class BabyAdapter extends TypeAdapter<Baby> {
       ..writeByte(2)
       ..write(obj.weight)
       ..writeByte(3)
-      ..write(obj.height);
+      ..write(obj.height)
+      ..writeByte(4)
+      ..write(obj.head);
   }
 
   @override

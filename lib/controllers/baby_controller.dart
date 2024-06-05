@@ -29,12 +29,14 @@ class BabyController extends GetxController {
     getAllList();
   }
 
-  updateBaby(
-      Baby baby, String weight, String height, String? note, DateTime? time) {
-    int w = parseValue(weight) ?? baby.weight;
-    int h = parseValue(height) ?? baby.height;
+  updateBaby(Baby baby, String weight, String height, String head, String? note,
+      DateTime? time) {
+    double w = double.tryParse(weight) ?? baby.weight;
+    double h = double.tryParse(height) ?? baby.height;
+    double hd = double.tryParse(head) ?? baby.head;
     baby.height = h;
     baby.weight = w;
+    baby.head = hd;
     baby.note = note ?? baby.note;
     baby.time = time ?? baby.time;
     hiveController.updateBaby(baby: baby);
