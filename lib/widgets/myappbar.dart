@@ -4,6 +4,7 @@ import 'package:bebek_takip/project_settings/project_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class MyAppbar extends StatefulWidget {
   String title;
   MyAppbar({

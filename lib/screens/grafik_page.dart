@@ -1,6 +1,5 @@
 import 'package:bebek_takip/controllers/baby_controller.dart';
 import 'package:bebek_takip/models/baby_models.dart';
-import 'package:bebek_takip/project_settings/project_color.dart';
 import 'package:bebek_takip/project_settings/project_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -3,7 +3,6 @@ import 'package:bebek_takip/main.dart';
 import 'package:bebek_takip/models/baby_models.dart';
 import 'package:bebek_takip/project_settings/project_color.dart';
 import 'package:bebek_takip/project_settings/project_text.dart';
-import 'package:bebek_takip/screens/analiz_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:get/get.dart';
