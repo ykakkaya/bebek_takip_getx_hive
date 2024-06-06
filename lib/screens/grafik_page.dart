@@ -18,14 +18,6 @@ class _GrafikPageState extends State<GrafikPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          ProjectText.grafikAppbarText,
-          style: TextStyle(color: ProjectColors.appBarTextColor),
-        ),
-        centerTitle: true,
-        backgroundColor: ProjectColors.appbarColor,
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [

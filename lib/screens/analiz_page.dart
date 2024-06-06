@@ -23,14 +23,6 @@ class _AnalizPageState extends State<AnalizPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          ProjectText.analizAppbarText,
-          style: TextStyle(color: ProjectColors.appBarTextColor),
-        ),
-        centerTitle: true,
-        backgroundColor: ProjectColors.appbarColor,
-      ),
       body: Obx(
         () => controller.babyList.isEmpty
             ? Center(

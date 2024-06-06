@@ -2,9 +2,11 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:bebek_takip/controllers/home_controller.dart';
 import 'package:bebek_takip/models/baby_models.dart';
 import 'package:bebek_takip/project_settings/project_color.dart';
+import 'package:bebek_takip/project_settings/project_text.dart';
 import 'package:bebek_takip/screens/add_baby.dart';
 import 'package:bebek_takip/screens/analiz_page.dart';
 import 'package:bebek_takip/screens/grafik_page.dart';
+import 'package:bebek_takip/widgets/myappbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -53,6 +55,13 @@ class _IndexPageState extends State<IndexPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(kToolbarHeight),
+          child: Obx(() => MyAppbar(
+                title: (controller.currentIndex.value == 0)
+                    ? ProjectText.grafikAppbarText
+                    : ProjectText.analizAppbarText,
+              ))),
       body: SafeArea(child: Obx(() => _getPage(controller.currentIndex.value))),
       bottomNavigationBar: Obx(
         () => AnimatedBottomNavigationBar(
