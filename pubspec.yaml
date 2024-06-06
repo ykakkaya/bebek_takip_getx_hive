@@ -43,6 +43,7 @@ dependencies:
   syncfusion_flutter_charts: ^24.1.41
   flutter_datetime_picker_plus: ^2.1.0
   build_runner: ^2.4.10
+  get_storage: ^2.1.1
   
 
 dev_dependencies:

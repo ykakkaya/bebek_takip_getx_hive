@@ -1,4 +1,5 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:bebek_takip/controllers/baby_datetime.dart';
 import 'package:bebek_takip/controllers/home_controller.dart';
 import 'package:bebek_takip/models/baby_models.dart';
 import 'package:bebek_takip/project_settings/project_color.dart';
@@ -9,12 +10,15 @@ import 'package:bebek_takip/screens/grafik_page.dart';
 import 'package:bebek_takip/widgets/myappbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:get_storage/get_storage.dart';
 
 Future<void> setupHive() async {
   await Hive.initFlutter();
+  await GetStorage.init();
   Hive.registerAdapter(BabyAdapter());
   await Hive.openBox<Baby>('babyBox');
 }
@@ -52,6 +56,9 @@ class IndexPage extends StatefulWidget {
 
 class _IndexPageState extends State<IndexPage> {
   final HomeController controller = Get.put(HomeController());
+  final BabyDateTimeController dateController =
+      Get.put(BabyDateTimeController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,8 +83,50 @@ class _IndexPageState extends State<IndexPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.off(() => const AddBaby());
+        onPressed: () async {
+          var birthday = await dateController.readDateTime();
+          if (birthday != null) {
+            Get.off(() => const AddBaby());
+          } else {
+            Get.defaultDialog(
+              title: "Bebeğinizin Doğum Gününü Giriniz.",
+              content: SizedBox(
+                height: Get.height * 0.05,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red.shade100),
+                  onPressed: () {
+                    DatePicker.showDatePicker(
+                      context,
+                      minTime: DateTime(2021, 01, 01, 01, 01),
+                      locale: LocaleType.tr,
+                      onConfirm: (time)  async {
+                          
+                        await dateController
+                            .writeDateTime(time);
+                        var birth = await dateController.readDateTime();
+                        print("111**********" + birth.toString());
+                        if (birth != null) {
+                          Get.back(); // Diyalog kutusunu kapat
+                          Get.off(() => const AddBaby());
+                        }
+                        Get.back(); // Diyalog kutusunu kapat
+                        Get.off(() => const AddBaby());
+                      },
+                    );
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.date_range_outlined),
+                      Obx(() => Text(
+                          "${ProjectText.addDateButtonText} : ${dateController.time.value.day}/${dateController.time.value.month}/${dateController.time.value.year}")),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          }
         },
         shape: const CircleBorder(),
         backgroundColor: ProjectColors.fabButtonColor,

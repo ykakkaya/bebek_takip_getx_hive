@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:bebek_takip/controllers/baby_datetime.dart';
 import 'package:bebek_takip/project_settings/project_color.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MyAppbar extends StatefulWidget {
   String title;
@@ -14,6 +16,7 @@ class MyAppbar extends StatefulWidget {
 }
 
 class _MyAppbarState extends State<MyAppbar> {
+  BabyDateTimeController dateController = Get.put(BabyDateTimeController());
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -23,6 +26,19 @@ class _MyAppbarState extends State<MyAppbar> {
       ),
       centerTitle: true,
       backgroundColor: ProjectColors.appbarColor,
+      actions: [
+        IconButton(
+            color: Colors.white,
+            onPressed: () async {
+              var time = await dateController.readDateTime();
+              print("**********" + time.toString());
+              dateController.deleteDateTime();
+              var deletime = await dateController.readDateTime();
+              print("******************");
+              print("**********" + deletime.toString());
+            },
+            icon: Icon(Icons.menu_outlined))
+      ],
     );
   }
 }
