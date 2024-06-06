@@ -51,8 +51,7 @@ class _AddBabyState extends State<AddBaby> {
               SizedBox(
                 height: Get.height * 0.05,
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red.shade100),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red.shade100),
                   onPressed: () {
                     DatePicker.showDatePicker(
                       context,
@@ -68,8 +67,7 @@ class _AddBabyState extends State<AddBaby> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.date_range_outlined),
-                      Text(
-                          "${ProjectText.addDateButtonText} : ${_time.day}/${_time.month}/${_time.year}"),
+                      Text("${ProjectText.addDateButtonText} : ${_time.day}/${_time.month}/${_time.year}"),
                     ],
                   ),
                 ),
@@ -95,8 +93,7 @@ class _AddBabyState extends State<AddBaby> {
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                     label: Text(ProjectText.addNote),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20))),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
               ),
               SizedBox(
                 height: Get.size.height * 0.02,
@@ -107,12 +104,7 @@ class _AddBabyState extends State<AddBaby> {
                   double height = double.tryParse(heightController.text) ?? 0;
                   double head = double.tryParse(headController.text) ?? 0;
                   String note = noteController.text ?? '';
-                  Baby baby = Baby(
-                      time: _time,
-                      weight: weight,
-                      height: height,
-                      note: note,
-                      head: head);
+                  Baby baby = Baby(time: _time, weight: weight, height: height, note: note, head: head);
                   controller.addBabyList(baby);
                   Get.off(() => const IndexPage());
                 },
@@ -133,9 +125,8 @@ class _AddBabyState extends State<AddBaby> {
       controller: controller,
       keyboardType: TextInputType.number,
       textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-          label: Text(text),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
+      decoration:
+          InputDecoration(label: Text(text), border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
     );
   }
 }

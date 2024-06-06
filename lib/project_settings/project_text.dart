@@ -9,7 +9,7 @@ class ProjectText {
   static String addNote = "Açıklama Giriniz";
   static String addWeight = "Kilo Bilgisi Giriniz";
   static String addHead = "Baş Çevresi Bilgisi Giriniz";
-  static String addDateButtonText = "Tarih Seçiniz";
+  static String addDateButtonText = "Ölçüm Tarihini Giriniz";
   static String addButtonText = "Ekle";
   static String snacbarDeleteTitle = "Sil";
   static String snackbarDeleteText = "İçerik Slinsin mi?";

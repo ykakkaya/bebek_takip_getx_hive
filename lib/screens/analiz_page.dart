@@ -57,22 +57,19 @@ class _AnalizPageState extends State<AnalizPage> {
                           title: ProjectText.showDialogTitle,
                           content: Row(
                             children: [
-                              SizedBox(
-                                  width: Get.size.width * 0.30,
-                                  child: Image.asset("assets/images/show.png")),
+                              SizedBox(width: Get.size.width * 0.30, child: Image.asset("assets/images/show.png")),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    Text("${ProjectText.date}:  ${item.time.day}/${item.time.month}/${item.time.year}"),
                                     Text(
-                                        "${ProjectText.date}:  ${item.time.day}/${item.time.month}/${item.time.year}"),
-                                    Text(
-                                        "${ProjectText.height}:  ${item.height} - ${ProjectText.weight}:  ${item.weight}"),
+                                        "${ProjectText.height}:  ${item.height} - ${ProjectText.weight}:  ${item.weight} \n${ProjectText.head}:  ${item.head}"),
                                     Text(
                                       "${ProjectText.description}:"
                                               "${item.note}" ??
                                           '',
-                                      maxLines: 15,
+                                      maxLines: 16,
                                     )
                                   ],
                                 ),
@@ -97,19 +94,16 @@ class _AnalizPageState extends State<AnalizPage> {
                             title: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                            "${ProjectText.height}: ${item.height}"),
-                                        Text(
-                                            " ${ProjectText.weight}: ${item.weight}"),
-                                      ],
-                                    ),
-                                    Text("${ProjectText.head}: ${item.head}")
-                                  ],
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("${ProjectText.height}: ${item.height}"),
+                                      Text("${ProjectText.weight}: ${item.weight}"),
+                                      Expanded(child: Text("${ProjectText.head}: ${item.head}"))
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -128,10 +122,8 @@ class _AnalizPageState extends State<AnalizPage> {
                                     )),
                                 IconButton(
                                     onPressed: () {
-                                      Get.snackbar("Uyarı",
-                                          "Veriyi Silmek İstiyor musunuz?",
-                                          dismissDirection:
-                                              DismissDirection.startToEnd,
+                                      Get.snackbar("Uyarı", "Veriyi Silmek İstiyor musunuz?",
+                                          dismissDirection: DismissDirection.startToEnd,
                                           duration: const Duration(seconds: 2),
                                           backgroundColor: Colors.red[200],
                                           mainButton: TextButton(
