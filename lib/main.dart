@@ -56,7 +56,8 @@ class IndexPage extends StatefulWidget {
 
 class _IndexPageState extends State<IndexPage> {
   final HomeController controller = Get.put(HomeController());
-  final BabyDateTimeController dateController = Get.put(BabyDateTimeController());
+  final BabyDateTimeController dateController =
+      Get.put(BabyDateTimeController());
 
   @override
   Widget build(BuildContext context) {
@@ -64,8 +65,9 @@ class _IndexPageState extends State<IndexPage> {
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(kToolbarHeight),
           child: Obx(() => MyAppbar(
-                title:
-                    (controller.currentIndex.value == 0) ? ProjectText.grafikAppbarText : ProjectText.analizAppbarText,
+                title: (controller.currentIndex.value == 0)
+                    ? ProjectText.grafikAppbarText
+                    : ProjectText.analizAppbarText,
               ))),
       body: SafeArea(child: Obx(() => _getPage(controller.currentIndex.value))),
       bottomNavigationBar: Obx(
@@ -91,7 +93,8 @@ class _IndexPageState extends State<IndexPage> {
               content: SizedBox(
                 height: Get.height * 0.05,
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red.shade100),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red.shade100),
                   onPressed: () {
                     DatePicker.showDatePicker(
                       context,
