@@ -156,7 +156,7 @@ class _IndexPageState extends State<IndexPage> {
         return ProjectText.grafikAppbarText;
 
       case 2:
-        return "AŞI TAKVİMİ";
+        return "   AŞI TAKVİMİ\n(Bilgi Amaçlıdır)";
 
       default:
         return ProjectText.analizAppbarText;

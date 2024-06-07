@@ -20,7 +20,7 @@ class VaccineController extends GetxController {
   RxList<Map<String, String>> getVaccineSchedule() {
     return [
       {
-        'age': "${t.value.day.toString()}/${t.value.month.toString()}/${t.value.year.toString()}",
+        'age': "Doğunca :${t.value.day.toString()}/${t.value.month.toString()}/${t.value.year.toString()}",
         'vaccine': 'Hepatit B (1. doz)'
       },
       {
