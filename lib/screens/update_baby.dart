@@ -61,20 +61,18 @@ class _UpdateBabyState extends State<UpdateBaby> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(
-                  height: Get.size.height * 0.30,
-                  child: Image.asset("assets/images/updatePage.png")),
+              SizedBox(height: Get.size.height * 0.30, child: Image.asset("assets/images/updatePage.png")),
               SizedBox(
                 height: Get.size.height * 0.02,
               ),
               SizedBox(
                 height: Get.height * 0.05,
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red.shade100),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red.shade100),
                   onPressed: () {
                     DatePicker.showDatePicker(
                       context,
+                      currentTime: widget.baby.time,
                       minTime: DateTime(2021, 01, 01, 01, 01),
                       locale: LocaleType.tr,
                       onConfirm: (time) {
@@ -114,21 +112,15 @@ class _UpdateBabyState extends State<UpdateBaby> {
                 textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
                     label: Text(ProjectText.addNote),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20))),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
               ),
               SizedBox(
                 height: Get.size.height * 0.02,
               ),
               ElevatedButton(
                 onPressed: () {
-                  controller.updateBaby(
-                      widget.baby,
-                      weightController.text,
-                      heightController.text,
-                      headController.text,
-                      noteController.text,
-                      widget.baby.time);
+                  controller.updateBaby(widget.baby, weightController.text, heightController.text, headController.text,
+                      noteController.text, widget.baby.time);
 
                   Get.back();
                 },
@@ -151,9 +143,8 @@ class _UpdateBabyState extends State<UpdateBaby> {
       controller: controller,
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.number,
-      decoration: InputDecoration(
-          label: Text(text),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
+      decoration:
+          InputDecoration(label: Text(text), border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
     );
   }
 }

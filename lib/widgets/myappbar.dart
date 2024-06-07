@@ -49,8 +49,7 @@ class _MyAppbarState extends State<MyAppbar> {
                         return const Text("Doğum Tarihi Bulunamadı");
                       } else {
                         final date = snapshot.data!;
-                        final formattedDate =
-                            "${date.day}/${date.month}/${date.year}";
+                        final formattedDate = "${date.day}/${date.month}/${date.year}";
                         return Text("Doğum Tarihi: $formattedDate");
                       }
                     },
@@ -58,11 +57,12 @@ class _MyAppbarState extends State<MyAppbar> {
                   value: 0,
                 ),
                 PopupMenuItem(
-                  child: Text("Doğum Tarihini Güncelle"),
+                  child: Text("Doğum Tarihi Ekle/Güncelle"),
                   value: 1,
-                  onTap: () {
+                  onTap: () async {
                     DatePicker.showDatePicker(
                       context,
+                      currentTime: await dateController.readDateTime(),
                       minTime: DateTime(2021, 01, 01, 01, 01),
                       locale: LocaleType.tr,
                       onConfirm: (time) async {

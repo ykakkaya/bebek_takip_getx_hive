@@ -7,6 +7,7 @@ import 'package:bebek_takip/project_settings/project_text.dart';
 import 'package:bebek_takip/screens/add_baby.dart';
 import 'package:bebek_takip/screens/analiz_page.dart';
 import 'package:bebek_takip/screens/grafik_page.dart';
+import 'package:bebek_takip/screens/vaccine.dart';
 import 'package:bebek_takip/widgets/myappbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -56,8 +57,7 @@ class IndexPage extends StatefulWidget {
 
 class _IndexPageState extends State<IndexPage> {
   final HomeController controller = Get.put(HomeController());
-  final BabyDateTimeController dateController =
-      Get.put(BabyDateTimeController());
+  final BabyDateTimeController dateController = Get.put(BabyDateTimeController());
 
   @override
   Widget build(BuildContext context) {
@@ -65,15 +65,13 @@ class _IndexPageState extends State<IndexPage> {
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(kToolbarHeight),
           child: Obx(() => MyAppbar(
-                title: (controller.currentIndex.value == 0)
-                    ? ProjectText.grafikAppbarText
-                    : ProjectText.analizAppbarText,
+                title: getAppbarName(controller.currentIndex.value),
               ))),
       body: SafeArea(child: Obx(() => _getPage(controller.currentIndex.value))),
       bottomNavigationBar: Obx(
         () => AnimatedBottomNavigationBar(
           backgroundColor: ProjectColors.bottomNavigatorColor,
-          icons: const [Icons.auto_graph_outlined, Icons.file_present_outlined],
+          icons: const [Icons.file_present_outlined, Icons.auto_graph_outlined, Icons.vaccines_outlined],
           activeIndex: controller.currentIndex.value,
           activeColor: ProjectColors.bottomActiveColor,
           inactiveColor: ProjectColors.bottomInactiveColor,
@@ -89,12 +87,11 @@ class _IndexPageState extends State<IndexPage> {
             Get.off(() => const AddBaby());
           } else {
             Get.defaultDialog(
-              title: "Bebeğinizin Doğum Gününü Giriniz.",
+              title: "Bebeğinizin Doğum Tarihini Giriniz",
               content: SizedBox(
                 height: Get.height * 0.05,
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red.shade100),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red.shade100),
                   onPressed: () {
                     DatePicker.showDatePicker(
                       context,
@@ -133,19 +130,36 @@ class _IndexPageState extends State<IndexPage> {
           color: ProjectColors.fabIconColor,
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
   Widget _getPage(int index) {
     switch (index) {
       case 0:
-        return const GrafikPage();
+        return const AnalizPage();
 
       case 1:
-        return const AnalizPage();
-      default:
         return const GrafikPage();
+      case 2:
+        return Vaccine();
+      default:
+        return const AnalizPage();
+    }
+  }
+
+  getAppbarName(int value) {
+    switch (value) {
+      case 0:
+        return ProjectText.analizAppbarText;
+
+      case 1:
+        return ProjectText.grafikAppbarText;
+
+      case 2:
+        return "AŞI TAKVİMİ";
+
+      default:
+        return ProjectText.analizAppbarText;
     }
   }
 }

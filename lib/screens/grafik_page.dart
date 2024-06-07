@@ -27,8 +27,7 @@ class _GrafikPageState extends State<GrafikPage> {
               series: <LineSeries<Baby, String>>[
                 LineSeries(
                   dataSource: controller.babyList,
-                  xValueMapper: (Baby baby, _) =>
-                      "${baby.time.day}/${baby.time.month}",
+                  xValueMapper: (Baby baby, _) => "${baby.time.day}/${baby.time.month}",
                   yValueMapper: (Baby baby, _) => baby.weight,
                   dataLabelSettings: const DataLabelSettings(isVisible: true),
                 )
@@ -41,8 +40,7 @@ class _GrafikPageState extends State<GrafikPage> {
               series: <LineSeries<Baby, String>>[
                 LineSeries(
                   dataSource: controller.babyList,
-                  xValueMapper: (Baby baby, _) =>
-                      "${baby.time.day}/${baby.time.month}",
+                  xValueMapper: (Baby baby, _) => "${baby.time.day}/${baby.time.month}",
                   yValueMapper: (Baby baby, _) => baby.height,
                   dataLabelSettings: const DataLabelSettings(isVisible: true),
                 )

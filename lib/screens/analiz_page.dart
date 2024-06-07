@@ -13,12 +13,6 @@ class AnalizPage extends StatefulWidget {
 }
 
 class _AnalizPageState extends State<AnalizPage> {
-  //@override
-  // void initState() {
-  //   controller.getAllList();
-  //   super.initState();
-  // }
-
   BabyController controller = Get.put(BabyController());
   @override
   Widget build(BuildContext context) {
@@ -38,11 +32,6 @@ class _AnalizPageState extends State<AnalizPage> {
                       ProjectText.emptyPageString,
                       style: const TextStyle(fontSize: 20),
                     ),
-                    Icon(
-                      Icons.arrow_circle_down,
-                      size: 30,
-                      color: ProjectColors.iconColor,
-                    )
                   ],
                 ),
               )
@@ -124,8 +113,8 @@ class _AnalizPageState extends State<AnalizPage> {
                                     onPressed: () {
                                       Get.snackbar("Uyarı", "Veriyi Silmek İstiyor musunuz?",
                                           dismissDirection: DismissDirection.startToEnd,
-                                          duration: const Duration(seconds: 2),
-                                          backgroundColor: Colors.red[200],
+                                          //duration: const Duration(seconds: 2),
+                                          backgroundColor: Colors.red[100],
                                           mainButton: TextButton(
                                               onPressed: () {
                                                 controller.removeBabyList(item);
