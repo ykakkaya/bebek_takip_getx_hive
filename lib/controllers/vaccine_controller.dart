@@ -79,7 +79,7 @@ class VaccineController extends GetxController {
             "${t.value.add(Duration(days: 1440)).day.toString()}/${t.value.add(Duration(days: 1440)).month.toString()}/${t.value.add(Duration(days: 1440)).year.toString()}",
         'vaccine': 'DaBT-IPA'
       },
-      {'age': "${t.value}", 'vaccine': ''},
+      {'age': "", 'vaccine': ''},
     ].obs;
   }
 
