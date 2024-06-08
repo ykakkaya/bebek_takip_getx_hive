@@ -4,23 +4,34 @@ import 'package:get_storage/get_storage.dart';
 
 class VaccineController extends GetxController {
   BabyDateTimeController dateController = Get.put(BabyDateTimeController());
-  late Rx<DateTime> t;
+  var t = DateTime.now().obs;
+  var vaccineSchedule = <Map<String, String>>[].obs;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
-    t = DateTime.now().obs;
-    getDate();
+    await getDate();
+    vaccineSchedule.assignAll(await getVaccineSchedule());
+  
   }
 
   getDate() async {
-    t.value = await dateController.readDateTime() ?? DateTime.now();
+    t.value = await dateController.readDateTime() ?? DateTime(2021);
+ 
+  }
+
+  updateList() async {
+    await getDate();
+    vaccineSchedule.assignAll(await getVaccineSchedule());
+    
   }
 
   RxList<Map<String, String>> getVaccineSchedule() {
+   
     return [
       {
-        'age': "Doğunca :${t.value.day.toString()}/${t.value.month.toString()}/${t.value.year.toString()}",
+        'age':
+            "Doğunca :${t.value.day.toString()}/${t.value.month.toString()}/${t.value.year.toString()}",
         'vaccine': 'Hepatit B (1. doz)'
       },
       {
@@ -68,7 +79,7 @@ class VaccineController extends GetxController {
             "${t.value.add(Duration(days: 1440)).day.toString()}/${t.value.add(Duration(days: 1440)).month.toString()}/${t.value.add(Duration(days: 1440)).year.toString()}",
         'vaccine': 'DaBT-IPA'
       },
-      {'age': "", 'vaccine': ''},
+      {'age': "${t.value}", 'vaccine': ''},
     ].obs;
   }
 

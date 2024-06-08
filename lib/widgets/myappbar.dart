@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bebek_takip/controllers/baby_datetime.dart';
+import 'package:bebek_takip/controllers/vaccine_controller.dart';
 import 'package:bebek_takip/project_settings/project_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
@@ -19,6 +20,7 @@ class MyAppbar extends StatefulWidget {
 
 class _MyAppbarState extends State<MyAppbar> {
   BabyDateTimeController dateController = Get.put(BabyDateTimeController());
+  VaccineController controller = Get.put(VaccineController());
   getDate() async {
     print(await dateController.readDateTime());
   }
@@ -49,7 +51,8 @@ class _MyAppbarState extends State<MyAppbar> {
                         return const Text("Doğum Tarihi Bulunamadı");
                       } else {
                         final date = snapshot.data!;
-                        final formattedDate = "${date.day}/${date.month}/${date.year}";
+                        final formattedDate =
+                            "${date.day}/${date.month}/${date.year}";
                         return Text("Doğum Tarihi: $formattedDate");
                       }
                     },
@@ -67,6 +70,7 @@ class _MyAppbarState extends State<MyAppbar> {
                       locale: LocaleType.tr,
                       onConfirm: (time) async {
                         await dateController.writeDateTime(time);
+                        await controller.updateList();
                         Get.snackbar(
                           'Bebek Takip',
                           'Doğum Tarihi Güncellendi',
