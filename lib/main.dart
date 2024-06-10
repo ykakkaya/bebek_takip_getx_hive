@@ -1,6 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:bebek_takip/controllers/baby_datetime.dart';
 import 'package:bebek_takip/controllers/home_controller.dart';
+import 'package:bebek_takip/controllers/vaccine_controller.dart';
 import 'package:bebek_takip/models/baby_models.dart';
 import 'package:bebek_takip/project_settings/project_color.dart';
 import 'package:bebek_takip/project_settings/project_text.dart';
@@ -57,8 +58,9 @@ class IndexPage extends StatefulWidget {
 
 class _IndexPageState extends State<IndexPage> {
   final HomeController controller = Get.put(HomeController());
-  final BabyDateTimeController dateController = Get.put(BabyDateTimeController());
-
+  final BabyDateTimeController dateController =
+      Get.put(BabyDateTimeController());
+  final VaccineController vcontroller = Get.put(VaccineController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +73,11 @@ class _IndexPageState extends State<IndexPage> {
       bottomNavigationBar: Obx(
         () => AnimatedBottomNavigationBar(
           backgroundColor: ProjectColors.bottomNavigatorColor,
-          icons: const [Icons.file_present_outlined, Icons.auto_graph_outlined, Icons.vaccines_outlined],
+          icons: const [
+            Icons.file_present_outlined,
+            Icons.auto_graph_outlined,
+            Icons.vaccines_outlined
+          ],
           activeIndex: controller.currentIndex.value,
           activeColor: ProjectColors.bottomActiveColor,
           inactiveColor: ProjectColors.bottomInactiveColor,
@@ -91,7 +97,8 @@ class _IndexPageState extends State<IndexPage> {
               content: SizedBox(
                 height: Get.height * 0.05,
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red.shade100),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red.shade100),
                   onPressed: () {
                     DatePicker.showDatePicker(
                       context,
@@ -100,6 +107,7 @@ class _IndexPageState extends State<IndexPage> {
                       onConfirm: (time) async {
                         await dateController.writeDateTime(time);
                         var birth = await dateController.readDateTime();
+                        await vcontroller.updateList();
 
                         if (birth != null) {
                           Get.back(); // Diyalog kutusunu kapat
